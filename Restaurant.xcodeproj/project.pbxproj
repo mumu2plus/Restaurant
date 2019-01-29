@@ -12,6 +12,14 @@
 		1B8724AD21FF8A5700AB1597 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B8724AB21FF8A5700AB1597 /* Main.storyboard */; };
 		1B8724AF21FF8A5800AB1597 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B8724AE21FF8A5800AB1597 /* Assets.xcassets */; };
 		1B8724B221FF8A5800AB1597 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1B8724B021FF8A5800AB1597 /* LaunchScreen.storyboard */; };
+		1B8724BA220058AB00AB1597 /* CategoryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724B9220058AB00AB1597 /* CategoryTableViewController.swift */; };
+		1B8724BC220058CB00AB1597 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724BB220058CB00AB1597 /* MenuTableViewController.swift */; };
+		1B8724BE220058DC00AB1597 /* OrderTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724BD220058DC00AB1597 /* OrderTableViewController.swift */; };
+		1B8724C0220067D300AB1597 /* MenuItemDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724BF220067D300AB1597 /* MenuItemDetailViewController.swift */; };
+		1B8724C222006CAD00AB1597 /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724C122006CAD00AB1597 /* MenuItem.swift */; };
+		1B8724C42200877300AB1597 /* IntermediaryModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724C32200877300AB1597 /* IntermediaryModels.swift */; };
+		1B8724C622008CB300AB1597 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724C522008CB300AB1597 /* Order.swift */; };
+		1B8724C82200905700AB1597 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8724C72200905700AB1597 /* MenuController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		1B8724AE21FF8A5800AB1597 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B8724B121FF8A5800AB1597 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		1B8724B321FF8A5800AB1597 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		1B8724B9220058AB00AB1597 /* CategoryTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryTableViewController.swift; sourceTree = "<group>"; };
+		1B8724BB220058CB00AB1597 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
+		1B8724BD220058DC00AB1597 /* OrderTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderTableViewController.swift; sourceTree = "<group>"; };
+		1B8724BF220067D300AB1597 /* MenuItemDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItemDetailViewController.swift; sourceTree = "<group>"; };
+		1B8724C122006CAD00AB1597 /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		1B8724C32200877300AB1597 /* IntermediaryModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IntermediaryModels.swift; sourceTree = "<group>"; };
+		1B8724C522008CB300AB1597 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		1B8724C72200905700AB1597 /* MenuController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +70,17 @@
 		1B8724A621FF8A5700AB1597 /* Restaurant */ = {
 			isa = PBXGroup;
 			children = (
+				1B8724B9220058AB00AB1597 /* CategoryTableViewController.swift */,
+				1B8724BB220058CB00AB1597 /* MenuTableViewController.swift */,
+				1B8724BD220058DC00AB1597 /* OrderTableViewController.swift */,
 				1B8724A721FF8A5700AB1597 /* AppDelegate.swift */,
 				1B8724A921FF8A5700AB1597 /* ViewController.swift */,
 				1B8724AB21FF8A5700AB1597 /* Main.storyboard */,
+				1B8724C522008CB300AB1597 /* Order.swift */,
+				1B8724C72200905700AB1597 /* MenuController.swift */,
+				1B8724C32200877300AB1597 /* IntermediaryModels.swift */,
+				1B8724C122006CAD00AB1597 /* MenuItem.swift */,
+				1B8724BF220067D300AB1597 /* MenuItemDetailViewController.swift */,
 				1B8724AE21FF8A5800AB1597 /* Assets.xcassets */,
 				1B8724B021FF8A5800AB1597 /* LaunchScreen.storyboard */,
 				1B8724B321FF8A5800AB1597 /* Info.plist */,
@@ -135,8 +159,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B8724C82200905700AB1597 /* MenuController.swift in Sources */,
+				1B8724C222006CAD00AB1597 /* MenuItem.swift in Sources */,
+				1B8724BC220058CB00AB1597 /* MenuTableViewController.swift in Sources */,
+				1B8724C0220067D300AB1597 /* MenuItemDetailViewController.swift in Sources */,
+				1B8724C622008CB300AB1597 /* Order.swift in Sources */,
+				1B8724BE220058DC00AB1597 /* OrderTableViewController.swift in Sources */,
+				1B8724C42200877300AB1597 /* IntermediaryModels.swift in Sources */,
 				1B8724AA21FF8A5700AB1597 /* ViewController.swift in Sources */,
 				1B8724A821FF8A5700AB1597 /* AppDelegate.swift in Sources */,
+				1B8724BA220058AB00AB1597 /* CategoryTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -285,6 +317,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 76NHZS5Z7B;
 				INFOPLIST_FILE = Restaurant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -303,6 +336,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 76NHZS5Z7B;
 				INFOPLIST_FILE = Restaurant/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
