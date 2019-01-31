@@ -11,6 +11,17 @@ import Foundation
 class MenuController {
     static let shared = MenuController()
     
+    static let orderUpdateNotification =
+        Notification.Name("MenuController.orderUpdated")
+    
+    var order = Order() {
+        didSet {
+            NotificationCenter.default.post(name:
+                MenuController.orderUpdateNotification, object: nil)
+        }
+        
+    }
+    
     let baseURL = URL(string: "http://localhost:8091/")!
     
     func fetchCategories(completion: @escaping([String]?) -> Void) {
