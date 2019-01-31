@@ -22,7 +22,7 @@ class MenuController {
         
     }
     
-    let baseURL = URL(string: "http://localhost:8091/")!
+    let baseURL = URL(string: "http://192.168.0.103:8091/")!
     
     func fetchCategories(completion: @escaping([String]?) -> Void) {
         let categoryURL = baseURL.appendingPathComponent("categories")
