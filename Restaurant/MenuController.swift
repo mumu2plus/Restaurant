@@ -10,6 +10,10 @@ import Foundation
 import UIKit
 
 class MenuController {
+    
+    private var itemsByID = [Int:MenuItem]()
+    private var itemsByCategory = [String:[MenuItem]]()
+    
     static let shared = MenuController()
     
     static let orderUpdateNotification =
@@ -23,43 +27,107 @@ class MenuController {
         
     }
     
-    let baseURL = URL(string: "http://192.168.0.103:8091/")!
+    let baseURL = URL(string: "http://192.168.0.102:8091/")!
     
-    func fetchCategories(completion: @escaping([String]?) -> Void) {
-        let categoryURL = baseURL.appendingPathComponent("categories")
-        let task = URLSession.shared.dataTask(with: categoryURL) {
-            (data, response, error) in
-            if let data = data,
-                let jsonDictionary = try?
-                JSONSerialization.jsonObject(with: data) as? [String: Any],
-                    let categories = jsonDictionary?["categories"] as?
-                        [String] {
-                        completion(categories)
-            } else {
-                completion(nil)
-            }
-        }
-        task.resume()
+    func item(withID itemID: Int) -> MenuItem? {
+        return itemsByID[itemID]
     }
     
-    func fetchMenuItems(forCategory categoryName: String,
-                        completion: @escaping([MenuItem]?) -> Void) {
+    func items(forCategory category: String) -> [MenuItem]? {
+        return itemsByCategory[category]
+    }
+    
+    var categories: [String] {
+        get {
+            return itemsByCategory.keys.sorted()
+        }
+    }
+    
+    private func process(_ items: [MenuItem]) {
+        itemsByID.removeAll()
+        itemsByCategory.removeAll()
+        
+        for item in items {
+            itemsByID[item.id] = item
+            itemsByCategory[item.category, default: []].append(item)
+        }
+    }
+    
+    func loadRemoteData() {
         let initialMenuURL = baseURL.appendingPathComponent("menu")
-        var components = URLComponents(url: initialMenuURL, resolvingAgainstBaseURL: true)!
-        components.queryItems = [URLQueryItem(name: "category", value: categoryName)]
+        let components = URLComponents(url: initialMenuURL, resolvingAgainstBaseURL: true)!
         let menuURL = components.url!
-        let task = URLSession.shared.dataTask(with: menuURL) {
-            (data, response, error) in
+        
+        let task = URLSession.shared.dataTask(with: menuURL) {data,_,_ in
             let jsonDecoder = JSONDecoder()
             if let data = data,
                 let menuItems = try? jsonDecoder.decode(MenuItems.self, from: data) {
-                completion(menuItems.items)
-            } else {
-                completion(nil)
+                self.process(menuItems.items)
             }
         }
         task.resume()
     }
+    
+    func loadItems() {
+        let documentsDirectoryURL =
+            FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let menuItemsFileURL =
+            documentsDirectoryURL.appendingPathComponent("menuItems")
+            .appendingPathExtension("json")
+        
+        guard let data = try? Data(contentsOf: menuItemsFileURL) else {return}
+        let items = (try? JSONDecoder().decode([MenuItem].self, from: data)) ?? []
+        process(items)
+    }
+    
+    func saveItems() {
+        let documentsDirectoryURL =
+            FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let menuItemsFileURL =
+            documentsDirectoryURL.appendingPathComponent("menuItems")
+            .appendingPathExtension("json")
+        
+        let items = Array(itemsByID.values)
+        if let data = try? JSONEncoder().encode(items) {
+            try? data.write(to: menuItemsFileURL)
+        }
+    }
+    
+//    func fetchCategories(completion: @escaping([String]?) -> Void) {
+//        let categoryURL = baseURL.appendingPathComponent("categories")
+//        let task = URLSession.shared.dataTask(with: categoryURL) {
+//            (data, response, error) in
+//            if let data = data,
+//                let jsonDictionary = try?
+//                JSONSerialization.jsonObject(with: data) as? [String: Any],
+//                    let categories = jsonDictionary?["categories"] as?
+//                        [String] {
+//                        completion(categories)
+//            } else {
+//                completion(nil)
+//            }
+//        }
+//        task.resume()
+//    }
+//
+//    func fetchMenuItems(forCategory categoryName: String,
+//                        completion: @escaping([MenuItem]?) -> Void) {
+//        let initialMenuURL = baseURL.appendingPathComponent("menu")
+//        var components = URLComponents(url: initialMenuURL, resolvingAgainstBaseURL: true)!
+//        components.queryItems = [URLQueryItem(name: "category", value: categoryName)]
+//        let menuURL = components.url!
+//        let task = URLSession.shared.dataTask(with: menuURL) {
+//            (data, response, error) in
+//            let jsonDecoder = JSONDecoder()
+//            if let data = data,
+//                let menuItems = try? jsonDecoder.decode(MenuItems.self, from: data) {
+//                completion(menuItems.items)
+//            } else {
+//                completion(nil)
+//            }
+//        }
+//        task.resume()
+//    }
     
     func fetchImage(url: URL, completion: @escaping (UIImage?) -> Void ){
         let task = URLSession.shared.dataTask(with: url) {

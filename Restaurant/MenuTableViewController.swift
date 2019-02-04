@@ -16,19 +16,22 @@ class MenuTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = category.capitalized
-        MenuController.shared.fetchMenuItems(forCategory: category) { (menuItems) in
-            if let menuItems = menuItems {
-                self.updateUI(with: menuItems)
-            }
-        }
+        updateUI()
     }
     
-    func updateUI(with menuItems: [MenuItem]) {
-        DispatchQueue.main.async {
-            self.menuItems = menuItems
-            self.tableView.reloadData()
-        }
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        coder.encode(category, forKey: "category")
+    }
+    
+    func updateUI() {
+//        DispatchQueue.main.async {
+//            self.menuItems = menuItems
+//            self.tableView.reloadData()
+//        }
+        title = category.capitalized
+        menuItems = MenuController.shared.items(forCategory: category) ?? []
+        tableView.reloadData()
     }
 
     // MARK: - Table view data source

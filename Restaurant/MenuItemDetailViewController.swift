@@ -26,6 +26,11 @@ class MenuItemDetailViewController: UIViewController {
         updateUI()
     }
     
+    override func encodeRestorableState(with coder: NSCoder) {
+        super.encodeRestorableState(with: coder)
+        coder.encode(menuItem.id, forKey: "menuItemId")
+    }
+    
     func updateUI() {
         titleLabel.text = menuItem.name
         priceLabel.text = String(format: "$%.2f", menuItem.price)

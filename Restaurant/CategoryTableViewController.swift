@@ -13,19 +13,22 @@ class CategoryTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        MenuController.shared.fetchCategories { (categories) in
-            if let categories = categories {
-                self.updateUI(with: categories)
-            }
-        }
-        
+//        MenuController.shared.fetchCategories { (categories) in
+//            if let categories = categories {
+//                self.updateUI(with: categories)
+//            }
+//        }
+        updateUI()
     }
 
-    func updateUI(with categories: [String]) {
-        DispatchQueue.main.async {
-            self.categories = categories
-            self.tableView.reloadData()
-        }
+    func updateUI() {
+//        DispatchQueue.main.async {
+//            self.categories = categories
+//            self.tableView.reloadData()
+//        }
+        categories = MenuController.shared.categories
+        
+        tableView.reloadData()
     }
     
     // MARK: - Table view data source
