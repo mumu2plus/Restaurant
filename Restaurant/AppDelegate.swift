@@ -35,6 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         orderTabBarItem = (self.window!.rootViewController! as!
             UITabBarController).viewControllers![1].tabBarItem
         
+        updateOrderBadge()
+        
         return true
     }
 

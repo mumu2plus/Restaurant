@@ -19,6 +19,10 @@ class MenuController {
     static let orderUpdateNotification =
         Notification.Name("MenuController.orderUpdated")
     
+    static let menuDataUpdateNotification =
+        Notification.Name("MenuController.menuDataUpdated")
+    
+    
     var order = Order() {
         didSet {
             NotificationCenter.default.post(name:
@@ -50,6 +54,11 @@ class MenuController {
         for item in items {
             itemsByID[item.id] = item
             itemsByCategory[item.category, default: []].append(item)
+        }
+        
+        DispatchQueue.main.async {
+            NotificationCenter.default.post(name:
+                MenuController.menuDataUpdateNotification, object: nil)
         }
     }
     

@@ -18,10 +18,11 @@ class CategoryTableViewController: UITableViewController {
 //                self.updateUI(with: categories)
 //            }
 //        }
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuController.menuDataUpdateNotification, object: nil)
         updateUI()
     }
 
-    func updateUI() {
+    @objc func updateUI() {
 //        DispatchQueue.main.async {
 //            self.categories = categories
 //            self.tableView.reloadData()

@@ -11,24 +11,35 @@ import UIKit
 class MenuTableViewController: UITableViewController {
     
     var menuItems = [MenuItem]()
-    var category: String!
+    var category: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        NotificationCenter.default.addObserver(self, selector: #selector(updateUI), name: MenuController.menuDataUpdateNotification, object: nil)
+        
         updateUI()
     }
     
     override func encodeRestorableState(with coder: NSCoder) {
         super.encodeRestorableState(with: coder)
+        guard let category = category else {return}
         coder.encode(category, forKey: "category")
     }
     
-    func updateUI() {
+    override func decodeRestorableState(with coder: NSCoder) {
+        super.decodeRestorableState(with: coder)
+        
+        category = coder.decodeObject(forKey: "category") as? String
+        updateUI()
+    }
+    
+    @objc func updateUI() {
 //        DispatchQueue.main.async {
 //            self.menuItems = menuItems
 //            self.tableView.reloadData()
 //        }
+        guard let category = category else {return}
         title = category.capitalized
         menuItems = MenuController.shared.items(forCategory: category) ?? []
         tableView.reloadData()
